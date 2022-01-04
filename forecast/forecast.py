@@ -1,4 +1,5 @@
-from os import XATTR_CREATE
+
+#NECESSARY IMPORTS
 from keras.callbacks import Callback
 import numpy as np
 import keras 
@@ -10,26 +11,35 @@ from keras.layers import RepeatVector
 from keras.layers import TimeDistributed,Dropout
 from numpy import testing
 from numpy.core.numerictypes import sctype2char
-from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import mean_squared_error
 import matplotlib.pyplot as plt
+import sys
 
 
 from tensorflow.keras import initializers
 
-from keras.utils.vis_utils import plot_model
 
-#reproducability
+#REPRODUCABILITY
 
 from numpy.random import seed
 seed(185)
 import tensorflow
 tensorflow.random.set_seed(185)
-##read model
 
-train_path="../Data/nasd_input.csv"
-test_path="../Data/nasd_query.csv"
+#read user arguments
+train_path="../Data/nasdaq2007_17.csv" #default
+train_len=320 #default
+for i in range(len(sys.argv)):
+  if sys.argv[i]=="-d":
+    train_path=sys.argv[i+1]
+  if sys.argv[i]=="-n":
+    train_len=int(sys.argv[i+1])
+  
 
+
+
+#function that reades the dataset
 def read_file(filePath):
     fl=open(filePath,"r")
     allSeries=[]
@@ -37,42 +47,48 @@ def read_file(filePath):
         time_serie=line.split()
         time_serie.pop(0)
         time_serie=[float(x) for x in time_serie]
-        #print("time_serie shape=",np.array(time_serie).shape,"vs",len(time_serie),"vs",len(line.split()))
         allSeries.append(np.array(time_serie))
 
     #trainSet=np.vstack(allSeries)
-    n_in=allSeries[0].shape
-    print("n_in=",n_in)
+    n_in=allSeries[0].shape[0]
     data=np.vstack(allSeries)
-    return data 
-#load and scale training data
-data=read_file(train_path)
-scaler = StandardScaler().fit(data)
-data=scaler.transform(data)
-array_sum = np.sum(data)
-array_has_nan = np. isnan(array_sum)
-if array_has_nan==True:
-    print("ERROR IN DATASET")
-    exit()
+    return data,n_in 
+#load and split the data
+data,n_in=read_file(train_path)
+test_len=n_in-train_len
+train_set=data[:,:train_len]
 
-#split data and label
-#goal is to use first prices to predict last price
-look_back=50
-xTrain=[]
-yTrain=[]
-total_length=data.shape[1]
+test_set=data[:,-test_len:]
 
-for stock in data:
-    #print("stock.shape=",stock.shape)
-    for i in range(look_back,total_length-look_back):
-        xTrain.append(stock[i-look_back:i])
-        yTrain.append(stock[i])
+training_set_scaled=[]
+test_set_scaled=[]
+#scale each time serie
+scalers=[]
+for i in range(0,data.shape[0]):
+  train=train_set[i].reshape(train_set[i].shape[0],1)
+  test=test_set[i].reshape(test_set[i].shape[0],1)
+  sc = MinMaxScaler(feature_range = (0, 1)).fit(train)
+  scalers.append(sc)
+  train=sc.transform(train)
+  test=sc.transform(test)
+  training_set_scaled.append(train)
+  test_set_scaled.append(test)
+training_set_scaled=np.array(training_set_scaled)
+test_set_scaled=np.array(test_set_scaled)
 
-xTrain=np.array(xTrain)
-yTrain=np.array(yTrain)
-print("X.shape=",xTrain.shape,"y.shape=",yTrain.shape)
+#create the training dataset using look back
+look_back=10
+xTrain = []
+yTrain = []
+for row in training_set_scaled:
+  for i in range(look_back, train_len):
+      xTrain.append(row[i-look_back:i])
+      yTrain.append(row[i])
+xTrain, yTrain = np.array(xTrain), np.array(yTrain)
+
 
 #define the model
+
 n_in=xTrain.shape[1] #number of features
 
 xTrain = xTrain.reshape((xTrain.shape[0], n_in, 1))
@@ -107,37 +123,38 @@ class EarlyStoppingByLossVal(Callback):
             self.model.stop_training = True
 callbacks = [
     EarlyStoppingByLossVal(monitor='loss', value=0.25, verbose=1),
-    # EarlyStopping(monitor='val_loss', patience=2, verbose=0),
-    #ModelCheckpoint(kfold_weights_path, monitor='val_loss', save_best_only=True, verbose=0),
+    
 ]
+#train the model
 model.fit(xTrain,yTrain,epochs=200,verbose=1,callbacks=callbacks)
 
-#read test data and scale them
-testData=read_file(test_path)
-testData=scaler.transform(testData)
-test_data_len=testData.shape[1]
-xTest=[]
-yTest=[]
-for stock in testData:
-    #print("stock.shape=",stock.shape)
-    for i in range(look_back,test_data_len-look_back):
-        xTest.append(stock[i-look_back:i])
-        yTest.append(stock[i])
+#choose some random stocks from the test set and predict them
 
-xTest=np.array(xTest)
-yTest=np.array(yTest)
 
-xTest = xTest.reshape((xTest.shape[0], n_in, 1))
-print("Xtest shape=",xTest.shape)
-yPred=model.predict(xTest)
-#yPred=scaler.inverse_transform(yPred)
+def display_pred(index):
+  stock=test_set_scaled[index]
+  xTest=[]
+  for i in range(look_back,test_len):
+    xTest.append(stock[i-look_back:i,0])
+  xTest=np.array(xTest)
+  xTest=xTest.reshape(xTest.shape[0],xTest.shape[1],1)
+  pred=model.predict(xTest)
 
-print("Test MSE:",mean_squared_error(yTest,yPred))
+  pred=scalers[index].inverse_transform(pred)
 
-yPred=model.predict(xTrain)
-print("Train MSE:",mean_squared_error(yTrain,yPred))
-print("ypred.shape=",yPred.shape,"xTest.shape=",xTest.shape)
-print("TIME TO PLOT")
-#now some plots
-original_test=scaler.inverse_transform(yTest)
-predicted_stock_price = scaler.inverse_transform(yPred)
+  initial_stock=test_set[index][look_back:]
+  plt.plot(np.linspace(0, test_len-look_back,test_len-look_back),initial_stock)
+  plt.plot(np.linspace(0, test_len-look_back,test_len-look_back),pred)
+
+plt.subplot(2, 2, 1)
+display_pred(0)
+plt.subplot(2, 2, 2)
+display_pred(4)
+plt.subplot(2, 2, 3)
+display_pred(7)
+plt.subplot(2, 2, 4)
+display_pred(5)
+plt.show()
+
+
+
