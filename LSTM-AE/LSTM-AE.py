@@ -1,3 +1,6 @@
+
+
+#necessary imports
 import numpy as np
 import keras 
 from keras.optimizers import adam_v2
@@ -22,16 +25,9 @@ import tensorflow
 tensorflow.random.set_seed(185)
 
 #read command line argumens
-THRESHOLD=0.0015
 train_path="../Data/nasdaq2007_17.csv"
-numSeries=320
-for i in range(len(sys.argv)):
-  if sys.argv[i]=="-mae":
-    THRESHOLD=float(sys.argv[i+1])
-  if sys.argv[i]=="-d":
-    train_path=sys.argv[i+1]
-  if sys.argv[i]=="-n":
-    numSeries=int(sys.argv[i+1])
+numSeries=340
+
   
 
 
@@ -77,39 +73,11 @@ model.compile(optimizer=opt, loss='mae')
 # fit model
 model.fit(X, X, epochs=2, verbose=1)
 
+
 #print mae in test set to see if the model generalises well
-stock=test[0]
 test=test.reshape(test.shape[0],n_in,1)
 pred=model.predict(test)
 print("TEST MAE:",np.absolute(np.subtract(test, pred)).mean())
 
-#NOW TIME TO PLOT SOME ANOMALIES
-def anomalies_in_stock(index):
-  stock=test[index]
-  stock=stock.reshape(1,n_in,1)
-  originalStock=sc.inverse_transform(stock.reshape(1,n_in))
-
-  predStock=model.predict(stock)
-  anomaliesX=[]
-  anomaliesY=[]
-  for i in range(n_in):
-    if np.absolute(stock[0][i][0]-predStock[0][i][0]) > THRESHOLD:
-      anomaliesX.append(i)
-      anomaliesY.append(originalStock[0][i])
-  #anomalies=np.array(anomalies)
-  plt.plot(np.linspace(0, n_in,n_in),originalStock[0])
-  plt.scatter(anomaliesX,anomaliesY,color="r")  
-  #plt.show()
-from matplotlib.pyplot import figure
-
-figure(figsize=(8, 6), dpi=80)
-
-plt.subplot(2, 2, 1)
-anomalies_in_stock(1)
-plt.subplot(2,2,2)
-anomalies_in_stock(2)
-plt.subplot(2,2,3)
-anomalies_in_stock(0)
-plt.subplot(2,2,4)
-anomalies_in_stock(7)
-plt.show()
+#save the model
+model.save("LSTM-AE")
