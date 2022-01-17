@@ -24,7 +24,7 @@ import tensorflow
 tensorflow.random.set_seed(185)
 
 #read command line argumens
-THRESHOLD=0.0015
+THRESHOLD=0.0015 #default value
 train_path="../Data/nasdaq2007_17.csv"
 numSeries=5
 for i in range(len(sys.argv)):

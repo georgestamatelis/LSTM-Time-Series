@@ -42,7 +42,7 @@ for i in range(len(sys.argv)):
 
 
 
-#function that reades the dataset
+#function that reads the dataset
 def read_file(filePath):
     fl=open(filePath,"r")
     allSeries=[]

@@ -56,27 +56,6 @@ train_set=data[:,:train_len]
 test_set=data[:,-test_len:]
 
 
-#early stopping 
-#https://stackoverflow.com/questions/37293642/how-to-tell-keras-stop-training-based-on-loss-value
-class EarlyStoppingByLossVal(Callback):
-  def __init__(self, monitor='val_loss', value=0.00001, verbose=0):
-    super(Callback, self).__init__()
-    self.monitor = monitor
-    self.value = value
-    self.verbose = verbose
-
-  def on_epoch_end(self, epoch, logs={}):
-    current = logs.get(self.monitor)
-    if current is None:
-      warnings.warn("Early stopping requires %s available!" % self.monitor, RuntimeWarning)
-
-    if current < self.value:
-      if self.verbose > 0:
-        print("Epoch %05d: early stopping THR" % epoch)
-      self.model.stop_training = True
-callbacks = [
-  EarlyStoppingByLossVal(monitor='loss', value=0.25, verbose=1),
-  ]
 
 models=[]
 scalers=[]
@@ -111,14 +90,14 @@ for i  in range(20):
 
     xTrain = xTrain.reshape((xTrain.shape[0], xTrain.shape[1], 1))
     model = Sequential()
-    model.add(LSTM(units=25, activation='relu', input_shape=(xTrain.shape[1],1)))
-    model.add(Dropout(0.2))
+    model.add(LSTM(units=50, activation='relu', input_shape=(xTrain.shape[1],1)))
+    #model.add(Dropout(0.2))
     model.add(Dense(1))
     opt = adam_v2.Adam(learning_rate=0.01)
 
     model.compile(optimizer=opt, loss='mse')
 
-    model.fit(xTrain,yTrain,epochs=200,verbose=1,callbacks=callbacks)
+    model.fit(xTrain,yTrain,epochs=1,verbose=1)
     models.append(model)
 #some plots to make sure training went ok 
 def plot_stock(index):

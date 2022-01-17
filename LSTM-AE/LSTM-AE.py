@@ -10,6 +10,8 @@ from keras.layers import Dense
 from keras.layers import RepeatVector
 from keras.layers import TimeDistributed,Dropout
 from sklearn.preprocessing import MinMaxScaler
+from keras.optimizers import adam_v2
+
 from tensorflow.keras import initializers
 
 import matplotlib.pyplot as plt
@@ -58,21 +60,23 @@ n_in=train.shape[1]
 # prepare output sequence
 X = train.reshape((train.shape[0], n_in, 1))
 # DEFINE THE MODEL
+
+
+
 model = Sequential()
 model.add(LSTM(units=250, activation='relu', input_shape=(n_in,1)))
-model.add(Dropout(0.2))
+#model.add(Dropout(0.2))
 model.add(RepeatVector(n_in))
 model.add(LSTM(units=250, activation='relu', return_sequences=True))
-model.add(Dropout(0.2))
+#model.add(Dropout(0.2))
 model.add(TimeDistributed(Dense(units=1)))
-from keras.optimizers import adam_v2
+
 opt = adam_v2.Adam(learning_rate=0.00001)
 
 
 model.compile(optimizer=opt, loss='mae')
 # fit model
-model.fit(X, X, epochs=2, verbose=1)
-
+model.fit(X, X, epochs=7)
 
 #print mae in test set to see if the model generalises well
 test=test.reshape(test.shape[0],n_in,1)
