@@ -1,0 +1,73 @@
+Querry :x
+Algorithm: {LSH_Frechet_Discrete} 
+Approximate Nearest neighbor:rig
+True Nearest neighbor:rig
+distance Approximate: 0.00104087
+distance True: 0.00104087
+-----------------------------------------------------------
+Querry :xel
+Algorithm: {LSH_Frechet_Discrete} 
+Approximate Nearest neighbor:unm
+True Nearest neighbor:unm
+distance Approximate: 0.000171304
+distance True: 0.000171304
+-----------------------------------------------------------
+Querry :xl
+Algorithm: {LSH_Frechet_Discrete} 
+Approximate Nearest neighbor:sti
+True Nearest neighbor:sti
+distance Approximate: 0.000708662
+distance True: 0.000708662
+-----------------------------------------------------------
+Querry :xlnx
+Algorithm: {LSH_Frechet_Discrete} 
+Approximate Nearest neighbor:syy
+True Nearest neighbor:syy
+distance Approximate: 0.000250168
+distance True: 0.000250168
+-----------------------------------------------------------
+Querry :xom
+Algorithm: {LSH_Frechet_Discrete} 
+Approximate Nearest neighbor:cvx
+True Nearest neighbor:cvx
+distance Approximate: 0.000496119
+distance True: 0.000496119
+-----------------------------------------------------------
+Querry :xray
+Algorithm: {LSH_Frechet_Discrete} 
+Approximate Nearest neighbor:pcg
+True Nearest neighbor:pcg
+distance Approximate: 0.000204071
+distance True: 0.000204071
+-----------------------------------------------------------
+Querry :xrx
+Algorithm: {LSH_Frechet_Discrete} 
+Approximate Nearest neighbor:lnc
+True Nearest neighbor:lnc
+distance Approximate: 0.000492141
+distance True: 0.000492141
+-----------------------------------------------------------
+Querry :yum
+Algorithm: {LSH_Frechet_Discrete} 
+Approximate Nearest neighbor:tjx
+True Nearest neighbor:tjx
+distance Approximate: 0.000311717
+distance True: 0.000311717
+-----------------------------------------------------------
+Querry :zbh
+Algorithm: {LSH_Frechet_Discrete} 
+Approximate Nearest neighbor:ups
+True Nearest neighbor:ups
+distance Approximate: 0.000730105
+distance True: 0.000730105
+-----------------------------------------------------------
+Querry :zion
+Algorithm: {LSH_Frechet_Discrete} 
+Approximate Nearest neighbor:sti
+True Nearest neighbor:sti
+distance Approximate: 0.000495426
+distance True: 0.000495426
+-----------------------------------------------------------
+tApproximateAverage: 8.3891
+tTrueAverage: 8.55278
+MAF: 1
