@@ -1,73 +1,73 @@
 Querry :x
 Algorithm: {Hypercube-Vector} 
-Approximate Nearest neighbor:rig
+Approximate Nearest neighbor:dvn
 True Nearest neighbor:rig
-distance Approximate: 948.216
-distance True: 948.216
+distance Approximate: 0.0156176
+distance True: 0.0106764
 -----------------------------------------------------------
 Querry :xel
 Algorithm: {Hypercube-Vector} 
-Approximate Nearest neighbor:t
+Approximate Nearest neighbor:orcl
 True Nearest neighbor:t
-distance Approximate: 211.418
-distance True: 211.418
+distance Approximate: 0.00338688
+distance True: 0.00190244
 -----------------------------------------------------------
 Querry :xl
 Algorithm: {Hypercube-Vector} 
-Approximate Nearest neighbor:sti
+Approximate Nearest neighbor:mbi
 True Nearest neighbor:sti
-distance Approximate: 561.222
-distance True: 561.222
+distance Approximate: 0.00800653
+distance True: 0.00610471
 -----------------------------------------------------------
 Querry :xlnx
 Algorithm: {Hypercube-Vector} 
-Approximate Nearest neighbor:payx
+Approximate Nearest neighbor:syy
 True Nearest neighbor:snps
-distance Approximate: 357.046
-distance True: 307.226
+distance Approximate: 0.00322595
+distance True: 0.00300511
 -----------------------------------------------------------
 Querry :xom
 Algorithm: {Hypercube-Vector} 
-Approximate Nearest neighbor:slb
-True Nearest neighbor:slb
-distance Approximate: 586.457
-distance True: 586.457
+Approximate Nearest neighbor:utx
+True Nearest neighbor:cvx
+distance Approximate: 0.007022
+distance True: 0.00677172
 -----------------------------------------------------------
 Querry :xray
 Algorithm: {Hypercube-Vector} 
-Approximate Nearest neighbor:pcg
+Approximate Nearest neighbor:pcar
 True Nearest neighbor:pcg
-distance Approximate: 274.728
-distance True: 274.728
+distance Approximate: 0.00320313
+distance True: 0.0025205
 -----------------------------------------------------------
 Querry :xrx
 Algorithm: {Hypercube-Vector} 
-Approximate Nearest neighbor:txt
-True Nearest neighbor:kss
-distance Approximate: 674.888
-distance True: 627.702
+Approximate Nearest neighbor:cma
+True Nearest neighbor:cma
+distance Approximate: 0.00541862
+distance True: 0.00541862
 -----------------------------------------------------------
 Querry :yum
 Algorithm: {Hypercube-Vector} 
-Approximate Nearest neighbor:gis
+Approximate Nearest neighbor:fast
 True Nearest neighbor:gis
-distance Approximate: 403.546
-distance True: 403.546
+distance Approximate: 0.00420874
+distance True: 0.0041487
 -----------------------------------------------------------
 Querry :zbh
 Algorithm: {Hypercube-Vector} 
-Approximate Nearest neighbor:ups
+Approximate Nearest neighbor:kmb
 True Nearest neighbor:ups
-distance Approximate: 669.383
-distance True: 669.383
+distance Approximate: 0.0112558
+distance True: 0.00722994
 -----------------------------------------------------------
 Querry :zion
 Algorithm: {Hypercube-Vector} 
 Approximate Nearest neighbor:sti
 True Nearest neighbor:sti
-distance Approximate: 445.729
-distance True: 445.729
+distance Approximate: 0.00412519
+distance True: 0.00412519
 -----------------------------------------------------------
-tApproximateAverage: 0.0025922
-tTrueAverage: 0.004993
-MAF: 1.11768
+tApproximateAverage: 0.0002941
+tTrueAverage: 0.0010351
+MAF: 1.64329
