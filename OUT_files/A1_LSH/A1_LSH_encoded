@@ -1,1 +1,73 @@
-
+Querry :x
+Algorithm: {Hypercube-Vector} 
+Approximate Nearest neighbor:avy
+True Nearest neighbor:rig
+distance Approximate: 0.0202672
+distance True: 0.0106764
+-----------------------------------------------------------
+Querry :xel
+Algorithm: {Hypercube-Vector} 
+Approximate Nearest neighbor:a
+True Nearest neighbor:t
+distance Approximate: 0.00452989
+distance True: 0.00190244
+-----------------------------------------------------------
+Querry :xl
+Algorithm: {Hypercube-Vector} 
+Approximate Nearest neighbor:avy
+True Nearest neighbor:sti
+distance Approximate: 0.0116005
+distance True: 0.00610471
+-----------------------------------------------------------
+Querry :xlnx
+Algorithm: {Hypercube-Vector} 
+Approximate Nearest neighbor:abt
+True Nearest neighbor:snps
+distance Approximate: 0.00473451
+distance True: 0.00300511
+-----------------------------------------------------------
+Querry :xom
+Algorithm: {Hypercube-Vector} 
+Approximate Nearest neighbor:apc
+True Nearest neighbor:cvx
+distance Approximate: 0.00862004
+distance True: 0.00677172
+-----------------------------------------------------------
+Querry :xray
+Algorithm: {Hypercube-Vector} 
+Approximate Nearest neighbor:aep
+True Nearest neighbor:pcg
+distance Approximate: 0.00297387
+distance True: 0.0025205
+-----------------------------------------------------------
+Querry :xrx
+Algorithm: {Hypercube-Vector} 
+Approximate Nearest neighbor:aiv
+True Nearest neighbor:cma
+distance Approximate: 0.0108872
+distance True: 0.00541862
+-----------------------------------------------------------
+Querry :yum
+Algorithm: {Hypercube-Vector} 
+Approximate Nearest neighbor:an
+True Nearest neighbor:gis
+distance Approximate: 0.00462608
+distance True: 0.0041487
+-----------------------------------------------------------
+Querry :zbh
+Algorithm: {Hypercube-Vector} 
+Approximate Nearest neighbor:afl
+True Nearest neighbor:ups
+distance Approximate: 0.0212143
+distance True: 0.00722994
+-----------------------------------------------------------
+Querry :zion
+Algorithm: {Hypercube-Vector} 
+Approximate Nearest neighbor:avy
+True Nearest neighbor:sti
+distance Approximate: 0.012867
+distance True: 0.00412519
+-----------------------------------------------------------
+tApproximateAverage: 4.78e-05
+tTrueAverage: 0.0010244
+MAF: 2.91668

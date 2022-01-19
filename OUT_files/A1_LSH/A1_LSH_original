@@ -1,0 +1,24 @@
+Querry :xel
+Algorithm: {LSH-Vector} 
+Approximate Nearest neighbor:bbt
+True Nearest neighbor:t
+distance Approximate: 21.9138
+distance True: 16.5215
+-----------------------------------------------------------
+Querry :xray
+Algorithm: {LSH-Vector} 
+Approximate Nearest neighbor:wec
+True Nearest neighbor:pcg
+distance Approximate: 27.3203
+distance True: 15.8576
+-----------------------------------------------------------
+Querry :yum
+Algorithm: {LSH-Vector} 
+Approximate Nearest neighbor:lb
+True Nearest neighbor:gis
+distance Approximate: 39.883
+distance True: 27.9217
+-----------------------------------------------------------
+tApproximateAverage: 0.000339667
+tTrueAverage: 0.00493533
+MAF: 1.72285
